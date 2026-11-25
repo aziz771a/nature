@@ -16,15 +16,15 @@ o3t:"Iqlim harakatlantiruvchisi",o3p:"Okean oqimlari issiqlikni sayyora bo‘yla
 };
 var els=[].slice.call(document.querySelectorAll('[data-i18n]'));
 els.forEach(function(e){e.setAttribute('data-ru',e.textContent)});
-var btn=document.querySelector('.langbtn');
+var btn=document.querySelector('.switch');
 function set(l){
 els.forEach(function(e){var t=l==='uz'?D.uz[e.getAttribute('data-i18n')]:null;e.textContent=t||e.getAttribute('data-ru')});
 document.documentElement.lang=l;
 document.title=document.querySelector('h1').textContent+' – '+document.querySelector('.logo').textContent;
-btn.textContent=l==='ru'?'O‘zbekcha':'Русский';
-btn.setAttribute('aria-label',l==='ru'?'O‘zbek tiliga o‘tish':'Переключить на русский');
+btn.setAttribute('data-l',l);
+btn.setAttribute('aria-checked',l==='uz');
 try{localStorage.setItem('lang',l)}catch(x){}}
-btn.onclick=function(){set(document.documentElement.lang==='ru'?'uz':'ru')};
+btn.onclick=function(){set(btn.getAttribute('data-l')==='ru'?'uz':'ru')};
 var s='ru';try{s=localStorage.getItem('lang')==='uz'?'uz':'ru'}catch(x){}
 set(s);
 })();
